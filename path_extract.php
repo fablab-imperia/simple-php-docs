@@ -10,7 +10,7 @@ function sanitize_address(string $path) : array
     }
     $path = explode(
         "|",
-        preg_replace("/[^a-zA-Z0-9_|]/", "", $path),
+        preg_replace("/[^a-zA-Z0-9_|\n?]/", "", $path),
         5
     );
     return $path;
@@ -29,7 +29,10 @@ class Path
         {
             $query_param_path = "";
         }
-        $this->folders_array = sanitize_address($query_param_path);
+        $this->folders_array = array_filter(
+            sanitize_address($query_param_path),
+            function ($v){return strlen($v) > 0;}
+        ) ;
         $this->file_path_folder = implode(
             "/",
             array_merge(["content"], $this->folders_array)
@@ -88,6 +91,11 @@ class Path
     public function as_url() : string
     {
         return "/index.php?path=" . implode("|", $this->folders_array );
+    }
+
+    public function as_url_mut() : string
+    {
+        return "/page_edit.php?path=" . implode("|", $this->folders_array );
     }
 
     public function get_name() : string

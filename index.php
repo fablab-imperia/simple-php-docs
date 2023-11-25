@@ -3,16 +3,19 @@
 include "path_extract.php";
 require_once "header.php";
 require_once "category.php";
+require_once "page.php";
 
 $p = new Path();
 $p->build_from_query_param($_GET["path"]);
 if ($p->is_category())
 {
-    echo "true";
+    $c = new Category($p);
+    $c->render();
 }
 else if ($p->is_page())
 {
-    echo "pagina";
+    $page = new Page($p);
+    $page->render();
 }
 else
 {
@@ -21,10 +24,6 @@ else
     require "footer.php";
     die;
 }
-
-echo $p->as_md_file();
-$c = new Category($p);
-$c->render();
 
 require "footer.php";
 ?>
