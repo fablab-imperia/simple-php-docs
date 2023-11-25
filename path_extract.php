@@ -30,7 +30,10 @@ class Path
             $query_param_path = "";
         }
         $this->folders_array = sanitize_address($query_param_path);
-        $this->file_path_folder = "content/" . implode("/", $this->folders_array);
+        $this->file_path_folder = implode(
+            "/",
+            array_merge(["content"], $this->folders_array)
+        );
     }
 
     function build_from_array(array $folders)
@@ -42,6 +45,11 @@ class Path
     public function as_md_file() : string
     {
         return $this->file_path_folder . "/index.md";
+    }
+
+    public function as_folder_path() : string
+    {
+        return $this->file_path_folder;
     }
 
     public function is_category() : bool
@@ -59,10 +67,17 @@ class Path
     public function find_children() : array
     {
         $subcategories = [];
-        foreach (new FilesystemIterator($this->file_path_folder) as $file)
+        $fs_iterator = new FileSystemIterator($this->file_path_folder);
+        foreach ($fs_iterator as $file)
         {
+            if (!is_dir(
+                $file
+            ))
+            {
+                continue;
+            }
             $p = new Path();
-            $p.build_from_array(
+            $p->build_from_array(
                 array_merge($this->folders_array, [$file->getBaseName()])
             );
             array_push($subcategories, $p);
@@ -72,7 +87,19 @@ class Path
     
     public function as_url() : string
     {
-        return "/index.php?path=" . implode("|", $folders_array );
+        return "/index.php?path=" . implode("|", $this->folders_array );
+    }
+
+    public function get_name() : string
+    {
+        if (count($this->folders_array) == 0)
+        {
+            return "Home";
+        }
+        else
+        {
+            return $this->folders_array[count($this->folders_array)-1];
+        }
     }
 }
 

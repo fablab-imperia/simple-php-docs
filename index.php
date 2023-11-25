@@ -14,20 +14,17 @@ else if ($p->is_page())
 {
     echo "pagina";
 }
-
-
-$c = new Category($_GET["path"]);
-$c->render();
-
-if ($c->num_subcategories()==0)
+else
 {
-    $file_path = $c->get_folder_path() . "/index.md";
-    if (is_file($file_path))
-    {
-        $full_text = file_get_contents($file_path);
-        echo $Parsedown->text($full_text);
-    }
-
+    http_response_code(404);
+    echo "Percorso \"" . $this->path . "\" inesistente";
+    require "footer.php";
+    die;
 }
 
+echo $p->as_md_file();
+$c = new Category($p);
+$c->render();
+
+require "footer.php";
 ?>

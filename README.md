@@ -2,8 +2,11 @@
 
 Una semplice wiki realizzata pro bono per [Fablab Imperia](https://fablabimperia.org).
 
-- [ ] basata su semplici file, sul modello di dokuwiki
-- [ ] ricerca testuale client-side (da fare)
+- [ ] render articoli da file markdown
+- [ ] interpretazione frontmatter
+- [ ] pagine di inserimento articoli
+- [ ] inserire misure di sicurezza con .htaccess
+- [ ] ricerca testuale client-side
 
 # Licenza e informazioni di copyright
 
