@@ -8,6 +8,7 @@ Una semplice wiki realizzata pro bono per [Fablab Imperia](https://fablabimperia
 - [ ] inserire misure di sicurezza con .htaccess
 - [ ] ricerca testuale client-side
 
+
 # Licenza e informazioni di copyright
 
 Software pubblicato con licenza AGPL, versione 3 o successiva. Di seguito i dettagli:

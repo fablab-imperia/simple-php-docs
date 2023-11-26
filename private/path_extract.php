@@ -141,29 +141,28 @@ class Path
         return $ar;
     }
 
-    public function create($nome, bool $is_page) : Path
+    public function create(string $nome, string $nome_cartella, bool $is_page) : Path
     {
-        if (!$this->is_page() && count($this->find_children())==0)
+        $p = new Path();
+        $p->build_from_array(
+            array_merge($this->folders_array, [$nome_cartella])
+        );
+        if (!$this->is_page() && !is_dir($p->as_folder_path()))
         {
-            mkdir($this->file_path_folder . "/" . $nome);
+            mkdir($this->file_path_folder . "/" . $nome_cartella);
             if ($is_page)
             {
                 file_put_contents(
-                    $this->file_path_folder . "/" . $nome . "/index.md",
+                    $this->file_path_folder . "/" . $nome_cartella . "/index.md",
                     "+++\ntitle=\"" . $nome . "\"\n+++"
                 );
             }
-
-            $p = new Path();
-            $p->build_from_array(
-                array_merge($this->folders_array, [$nome])
-            );
             return $p;
         }
         else
         {
             http_response_code(403);
-            echo "Impossibile creare la pagina qui";
+            echo "Impossibile creare contenuti dentro a una pagina";
             require "footer.php";
             die;
         }

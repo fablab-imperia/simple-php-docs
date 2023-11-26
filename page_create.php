@@ -17,7 +17,7 @@ if (isset($_POST["nome"]) && isset($_POST["tipo_creazione"]))
     $nome = $_POST["nome"];
     $tipo = $_POST["tipo_creazione"];
     $nome_cartella = preg_replace(
-        "/[^a-zA-Z 0-9]/",
+        "/[^a-zA-Z0-9]/",
         "_",
         strtolower($nome)
     );
@@ -31,7 +31,7 @@ if (isset($_POST["nome"]) && isset($_POST["tipo_creazione"]))
         die;
     }
 
-    $new_page = $p->create($nome, $tipo == "pagina");
+    $new_page = $p->create($nome, $nome_cartella, $tipo == "pagina");
     header("Location: " . $new_page->as_url());
 }
 ?>

@@ -19,15 +19,15 @@ class Category
         // echo $this->subcategories;
         require_once "card.php";
         $children = $this->path->find_children();
-        foreach ($children as $subcat)
-        {
-            Card($subcat->get_name(), $subcat->as_url());
-            // echo "<li><a href=\"" . $subcat->as_url() . "\">" . "Pagina: " .  $subcat->get_name() . "</a></li>";
-        }
 
-        if (count($children)==0)
+        // if (count($children)==0)
         {
             echo "<a class=\"button\" href=\"" . "/page_create.php?" . $this->path->as_query_only() . "\">Crea pagina o categoria</a>";
+        }
+        foreach ($children as $subcat)
+        {
+            Card($subcat);
+            // echo "<li><a href=\"" . $subcat->as_url() . "\">" . "Pagina: " .  $subcat->get_name() . "</a></li>";
         }
     }
 }
