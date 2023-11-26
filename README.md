@@ -2,9 +2,9 @@
 
 Una semplice wiki realizzata pro bono per [Fablab Imperia](https://fablabimperia.org).
 
-- [ ] render articoli da file markdown
-- [ ] interpretazione frontmatter
-- [ ] pagine di inserimento articoli
+- [x] render articoli da file markdown
+- [x] interpretazione frontmatter
+- [x] pagine di inserimento articoli
 - [ ] inserire misure di sicurezza con .htaccess
 - [ ] ricerca testuale client-side
 

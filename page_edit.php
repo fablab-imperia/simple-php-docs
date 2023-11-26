@@ -1,8 +1,8 @@
 <?php
 include "path_extract.php";
-require_once "page.php";
-require "header.php";
-require_once "CONST.php";
+require_once "private/page.php";
+require "private/header.php";
+require_once "private/CONST.php";
 
 
 $p = new Path();
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $contenuto = preg_replace(REGEXP_CONTENT_FILTER, "", $_POST["contenuto"]);
         file_put_contents(
             $p->as_md_file(),
-            "+++\ntitolo=\"" . $titolo . "\"\n+++\n" .
+            "+++\ntitle=\"" . $titolo . "\"\n+++\n" .
             $contenuto
         );
     }
@@ -52,5 +52,5 @@ echo $page->render();
 ?>
 
 <?php
-require "footer.php";
+require "private/footer.php";
 ?>

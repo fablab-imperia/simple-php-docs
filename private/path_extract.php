@@ -98,6 +98,11 @@ class Path
         return "/page_edit.php?path=" . implode("|", $this->folders_array );
     }
 
+    public function as_query_only() : string
+    {
+        return "path=" . implode("|", $this->folders_array );
+    }
+
     public function get_name() : string
     {
         if (count($this->folders_array) == 0)
@@ -106,6 +111,13 @@ class Path
         }
         else
         {
+            if ($this->is_page())
+            {
+                require_once "page.php";
+                $p = new Page($this);
+                // $p->build_from_array($this->folders_array);
+                return $p->get_title();
+            }
             return $this->folders_array[count($this->folders_array)-1];
         }
     }
@@ -127,6 +139,34 @@ class Path
         }
         $ar = array_reverse($ar);
         return $ar;
+    }
+
+    public function create($nome, bool $is_page) : Path
+    {
+        if (!$this->is_page() && count($this->find_children())==0)
+        {
+            mkdir($this->file_path_folder . "/" . $nome);
+            if ($is_page)
+            {
+                file_put_contents(
+                    $this->file_path_folder . "/" . $nome . "/index.md",
+                    "+++\ntitle=\"" . $nome . "\"\n+++"
+                );
+            }
+
+            $p = new Path();
+            $p->build_from_array(
+                array_merge($this->folders_array, [$nome])
+            );
+            return $p;
+        }
+        else
+        {
+            http_response_code(403);
+            echo "Impossibile creare la pagina qui";
+            require "footer.php";
+            die;
+        }
     }
 }
 

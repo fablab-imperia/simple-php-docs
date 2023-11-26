@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ .'/parsedown-1.7.4/Parsedown.php';
+require_once  __DIR__ . '/../parsedown-1.7.4/Parsedown.php';
 
 require_once "path_extract.php";
 require_once "CONST.php";

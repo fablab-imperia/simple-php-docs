@@ -1,5 +1,5 @@
 +++
-titolo="àcosa naaae so"
+title="Programmazione Arduino"
 +++
 àà
 
@@ -13,3 +13,7 @@ cencia
 fn abc
 
 ```
+
+- anc
+- asas
+- assa

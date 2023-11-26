@@ -14,9 +14,14 @@ require_once "CONST.php";
   <h1><?php echo SITE_NAME; ?></h1>
   <nav>
     <?php
-    foreach ($GLOBALS["breadcrumb"]as $i => $path)
+    foreach ($GLOBALS["breadcrumb"] as $i => $path)
     {
-      echo "<a href=\"" . $path->as_url() . "\">" . $path->get_name() . "</a>";
+      $cur_class = "";
+      if ($i == count($GLOBALS["breadcrumb"]) -1)
+      {
+        $cur_class = "current";
+      }
+      echo "<a class=\"" . $cur_class . "\" href=\"" . $path->as_url() . "\">" . $path->get_name() . "</a>";
     }
     ?>
   </nav>
