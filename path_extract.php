@@ -109,6 +109,25 @@ class Path
             return $this->folders_array[count($this->folders_array)-1];
         }
     }
+
+    public function get_breadcrumb_data() : array
+    {
+        $ar = array();
+        for ($i=0; $i<count($this->folders_array)+1; $i++)
+        {
+            $p = new Path();
+            $p->build_from_array(
+                array_slice(
+                    $this->folders_array,
+                    0,
+                    count($this->folders_array)-$i
+                )
+                );
+            array_push($ar, $p);
+        }
+        $ar = array_reverse($ar);
+        return $ar;
+    }
 }
 
 ?>

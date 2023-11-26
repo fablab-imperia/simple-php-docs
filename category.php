@@ -2,7 +2,6 @@
 require_once __DIR__ .'/parsedown-1.7.4/Parsedown.php';
 
 require_once "path_extract.php";
-
 $Parsedown = new Parsedown();
 $Parsedown->setSafeMode(true);
 

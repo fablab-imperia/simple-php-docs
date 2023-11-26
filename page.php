@@ -2,9 +2,7 @@
 require_once __DIR__ .'/parsedown-1.7.4/Parsedown.php';
 
 require_once "path_extract.php";
-
-
-
+require_once "CONST.php";
 class Page
 {
     private $path;
@@ -20,13 +18,19 @@ class Page
         {
             $Parsedown = new Parsedown();
             $Parsedown->setSafeMode(true);
+            echo "<h1>" . $this->get_title() . "</h1>";
+            echo "<a href=\"" . $this->path->as_url_mut() . "\">Modifica</a>";
+            echo "<hr>";
+
             echo $Parsedown->text(
                 $this->get_content_only()
             );
         }
         else
         {
+            http_response_code(503);
             echo "Questa non è una pagina";
+            die;
         }
     }
 
@@ -45,6 +49,36 @@ class Page
         );
     }
 
+    public function get_title() : ?string
+    {
+        $full_text = $this->get_full_file_content();
+        $frontmatter_start_index = strpos($full_text, "+++")+3;
+        if ($frontmatter_start_index==false)
+        {
+            http_response_code(503);
+            echo "Frontmatter non valido";
+            die;
+        }
+        $frontmatter_stop_index = strpos($full_text, "+++", $frontmatter_start_index);
+        if ($frontmatter_stop_index==false)
+        {
+            http_response_code(503);
+            echo "Frontmatter non valido";
+            die;
+        }
+
+        $frontmatter = substr($full_text, $frontmatter_start_index, $frontmatter_stop_index-$frontmatter_start_index);
+        preg_match(REGEXP_TITLE_EXTRACT, $frontmatter, $output);
+
+        if (count($output) < 2)
+        {
+            http_response_code(503);
+            echo "Frontmatter non valido, titolo assente";
+            die;
+        }
+
+        return $output[1];
+    }
 
 }
 ?>
