@@ -177,22 +177,6 @@ class Path
         }
     }
 
-    public function get_img_path(string $nome_img) : string
-    {
-        if (!$this->is_page())
-        {
-            http_response_code(403);
-            echo "Il percorso non può ottenere immagini";
-            die;
-        }
-        if ($extension!="png" && $extension!="jpg")
-        {
-            http_response_code(403);
-            echo "Estensione non supportata";
-            die;
-        }
-    }
-
     public function get_images()
     {
         if (!$this->is_page())
@@ -202,6 +186,4 @@ class Path
             die;
         }
     }
-}
-
-?>
+} ?>
