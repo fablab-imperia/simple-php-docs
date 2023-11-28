@@ -5,6 +5,8 @@ Una semplice wiki realizzata pro bono per [Fablab Imperia](https://fablabimperia
 - [x] render articoli da file markdown
 - [x] interpretazione frontmatter
 - [x] pagine di inserimento articoli
+- [x] restituzione immagini
+- [ ] caricamento immagini
 - [ ] inserire misure di sicurezza con .htaccess
 - [ ] ricerca testuale client-side
 

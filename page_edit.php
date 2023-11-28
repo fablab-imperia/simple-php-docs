@@ -42,7 +42,7 @@ echo "<a href=\"" . $p->as_url() . "\">Torna in visualizzazione</a>";
     <label for="titolo">Titolo</label>
     <input required maxlength=20 type="text" name="titolo" id="titolo" value="<?php echo $page->get_title();?>">
     <label for="contenuto">Contenuto</label>
-    <textarea style="font-family:monospace;" required name="contenuto" id="contenuto" cols="100" rows="25"><?php echo $page->get_content_only();?></textarea>
+    <textarea required name="contenuto" id="contenuto" cols="100" rows="25"><?php echo $page->get_content_only();?></textarea>
     <button type="submit">Salva</button>
 </form>
 </section>
