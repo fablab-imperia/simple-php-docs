@@ -25,7 +25,7 @@ else
 {
     http_response_code(404);
     require "private/header.php";
-    echo "Percorso \"" . $this->path . "\" inesistente";
+    echo "Percorso \"" . $p->as_url() . "\" inesistente";
 }
 require "private/footer.php";
 ?>

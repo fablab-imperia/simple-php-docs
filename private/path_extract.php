@@ -29,20 +29,29 @@ class Path
         {
             $query_param_path = "";
         }
-        $this->folders_array = array_filter(
+        // $this->folders_array = array_filter(
+        //     sanitize_address($query_param_path),
+        //     function ($v){return strlen($v) > 0;}
+        // );
+        $this->build_from_array(
             sanitize_address($query_param_path),
             function ($v){return strlen($v) > 0;}
-        ) ;
-        $this->file_path_folder = implode(
-            "/",
-            array_merge(["content"], $this->folders_array)
         );
+        
+        // $this->file_path_folder = __DIR__ . "/../" . implode(
+        //     "/",
+        //     array_merge(["content"], $this->folders_array)
+        // );
+        // echo $this->file_path_folder;
     }
 
     function build_from_array(array $folders)
     {
         $this->folders_array = $folders;
-        $this->file_path_folder = "content/" . implode("/", $this->folders_array);
+        $this->file_path_folder = __DIR__ . "/../" . implode(
+            "/",
+            array_merge(["content"], $this->folders_array)
+        );
     }
 
     public function as_md_file() : string
@@ -90,12 +99,12 @@ class Path
     
     public function as_url() : string
     {
-        return "/index.php?path=" . implode("|", $this->folders_array );
+        return SITE_URL . "/index.php?path=" . implode("|", $this->folders_array );
     }
 
     public function as_url_mut() : string
     {
-        return "/page_edit.php?path=" . implode("|", $this->folders_array );
+        return SITE_URL . "/page_edit.php?path=" . implode("|", $this->folders_array );
     }
 
     public function as_query_only() : string
@@ -164,6 +173,32 @@ class Path
             http_response_code(403);
             echo "Impossibile creare contenuti dentro a una pagina";
             require "footer.php";
+            die;
+        }
+    }
+
+    public function get_img_path(string $nome_img) : string
+    {
+        if (!$this->is_page())
+        {
+            http_response_code(403);
+            echo "Il percorso non può ottenere immagini";
+            die;
+        }
+        if ($extension!="png" && $extension!="jpg")
+        {
+            http_response_code(403);
+            echo "Estensione non supportata";
+            die;
+        }
+    }
+
+    public function get_images()
+    {
+        if (!$this->is_page())
+        {
+            http_response_code(403);
+            echo "Il percorso non può ottenere immagini";
             die;
         }
     }

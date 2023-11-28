@@ -23,7 +23,9 @@ class Page
             echo "<hr>";
 
             echo $Parsedown->text(
-                $this->get_content_only()
+                $this->insert_relative_links(
+                    $this->get_content_only()
+                )
             );
         }
         else
@@ -46,7 +48,7 @@ class Page
         return substr(
             $s,
             strpos($s, "+++", 1) + 3
-        );
+        ); 
     }
 
     public function get_title() : ?string
@@ -80,5 +82,24 @@ class Page
         return $output[1];
     }
 
+    function insert_relative_links(string $text_content) : string
+    {
+        // Link ad altre pagine
+        return preg_replace_callback(
+            "/(!*)\[([a-zA-Z0-9 \_\.]*)]\(([|a-z_\.]+)\)/",
+            function ($a){
+                // if ($a[1]=="!")
+                // {
+                //     $new_url = "/index." . $tpath->as_query_only();
+                // }
+                // else
+                // {
+                //     $new_url = "/index." . $path->as_query_only();
+                // }                
+                return $a[1] . "[" . $a[2] . "](" . $a[3] . ")";
+            },
+            $text_content
+        );
+    }
 }
 ?>

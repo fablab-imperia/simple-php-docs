@@ -1,5 +1,5 @@
 <?php
-include "path_extract.php";
+include "private/path_extract.php";
 require_once "private/page.php";
 require "private/header.php";
 require_once "private/CONST.php";
@@ -42,7 +42,7 @@ echo "<a href=\"" . $p->as_url() . "\">Torna in visualizzazione</a>";
     <label for="titolo">Titolo</label>
     <input required maxlength=20 type="text" name="titolo" id="titolo" value="<?php echo $page->get_title();?>">
     <label for="contenuto">Contenuto</label>
-    <textarea required name="contenuto" id="contenuto" cols="100" rows="25"><?php echo $page->get_content_only();?></textarea>
+    <textarea style="font-family:monospace;" required name="contenuto" id="contenuto" cols="100" rows="25"><?php echo $page->get_content_only();?></textarea>
     <button type="submit">Salva</button>
 </form>
 </section>
