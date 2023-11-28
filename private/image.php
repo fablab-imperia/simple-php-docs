@@ -8,7 +8,7 @@ class Image
     private string $nome;
     private string $estensione;
 
-    function __construct(Path $path, string $nome_img)
+    function __construct(Path $path, ?string $nome_img)
     {
         if (!isset($nome_img))
         {
@@ -38,6 +38,20 @@ class Image
         $this->estensione = $matches[2];
     }
 
+    public function save_new($tmp_path)
+    {
+        move_uploaded_file(
+            $tmp_path,
+            $this->as_full_file_path()
+        );
+    }
+
+    function as_full_file_path() : string
+    {
+        $img_path = $this->path->as_folder_path() . "/" . $this->nome . "." . $this->estensione;
+        return $img_path;
+    }
+
     public function dump()
     {
         if ($this->estensione=="png")
@@ -48,7 +62,8 @@ class Image
         {
             $mime = "image/jpg";
         }
-        $img_path = $this->path->as_folder_path() . "/" . $this->nome . "." . $this->estensione;
+        
+        $img_path = $this->as_full_file_path();
         if (!file_exists($img_path))
         {
             http_response_code(404);

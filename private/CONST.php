@@ -6,5 +6,6 @@ const REGEXP_TITLE_EXTRACT = "/title\s*=\s*\"([a-zA-Z0-9 _'àèéìòùAÈÉÌÒ
 const REGEXP_IMG_NAME_EXTRACT = "/^([a-z0-9_]+)\.(png|jpg)$/";
 
 const SITE_NAME = "Fablab Wiki";
-const SITE_URL = "/testwiki";
+// const SITE_URL = "/testwiki";
+const SITE_URL = "";
 ?>
