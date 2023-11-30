@@ -6,7 +6,7 @@ Una semplice wiki realizzata pro bono per [Fablab Imperia](https://fablabimperia
 - [x] interpretazione frontmatter
 - [x] pagine di inserimento articoli
 - [x] restituzione immagini
-- [ ] caricamento immagini
+- [x] caricamento immagini
 - [ ] inserire misure di sicurezza con .htaccess
 - [ ] ricerca testuale client-side
 

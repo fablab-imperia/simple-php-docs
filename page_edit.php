@@ -37,11 +37,6 @@ echo "<a href=\"" . $p->as_url() . "\">Torna in visualizzazione</a>";
 ?>
 
 <section>
-    <header>Caricamento immagini</header>
-        <?php require "img_list.php"; ?>
-</section>
-
-<section>
 <form action="<?php echo $p->as_url_mut(); ?>" method="post">
     <button type="submit">Salva</button>
     <label for="titolo">Titolo</label>
@@ -51,10 +46,22 @@ echo "<a href=\"" . $p->as_url() . "\">Torna in visualizzazione</a>";
     <button type="submit">Salva</button>
 </form>
 </section>
-<h1>Anteprima pagina salvata:</h1>
-<?php
-echo $page->render();
-?>
+
+<section>
+<details>
+    <summary>Immagini</summary>
+    <header>Caricamento immagini</header>
+        <?php require "img.php"; ?>
+</details>
+</section>
+
+<section>
+    <h1>Anteprima pagina salvata:</h1>
+    <?php
+    echo $page->render();
+    ?>
+</section>
+
 
 <?php
 require "private/footer.php";
