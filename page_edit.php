@@ -37,6 +37,11 @@ echo "<a href=\"" . $p->as_url() . "\">Torna in visualizzazione</a>";
 ?>
 
 <section>
+    <header>Caricamento immagini</header>
+        <?php require "img_list.php"; ?>
+</section>
+
+<section>
 <form action="<?php echo $p->as_url_mut(); ?>" method="post">
     <button type="submit">Salva</button>
     <label for="titolo">Titolo</label>

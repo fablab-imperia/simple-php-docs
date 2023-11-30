@@ -1,6 +1,8 @@
 <?php
-// Funzione comoda per estrarre la querystring
+require_once "image.php";
+require_once "CONST.php";
 
+// Funzione comoda per estrarre la querystring
 // Restituisce l'array spezzettato del percorso
 function sanitize_address(string $path) : array
 {
@@ -185,5 +187,22 @@ class Path
             echo "Il percorso non può ottenere immagini";
             die;
         }
+
+        $images = [];
+        $fs_iterator = new FileSystemIterator($this->file_path_folder);
+        foreach ($fs_iterator as $file)
+        {
+            if (
+                preg_match(
+                    REGEXP_IMG_NAME_EXTRACT,
+                    $file->getBaseName()
+                )
+            )
+            {
+                $img = new Image($this, $file->getBaseName());
+                array_push($images, $img);
+            }
+        }
+        return $images;
     }
 } ?>

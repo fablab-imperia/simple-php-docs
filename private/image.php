@@ -52,6 +52,11 @@ class Image
         return $img_path;
     }
 
+    function get_filename() : string
+    {
+        return $this->nome . "." . $this->estensione;
+    }
+
     public function dump()
     {
         if ($this->estensione=="png")
