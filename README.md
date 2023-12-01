@@ -8,7 +8,7 @@ Una semplice wiki realizzata pro bono per [Fablab Imperia](https://fablabimperia
 - [x] restituzione immagini
 - [x] caricamento immagini
 - [x] intra link
-- [ ] inserire misure di sicurezza con .htaccess
+- [x] inserire misure di sicurezza con .htaccess
 - [ ] ricerca testuale client-side
 
 
