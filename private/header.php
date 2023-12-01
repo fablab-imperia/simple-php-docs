@@ -7,8 +7,8 @@ require_once "CONST.php";
   <meta charset="utf-8">
   <title><?php echo SITE_NAME . " - " . $GLOBALS["page_title"] ?></title>
   <!-- <link href="/mini-default.min.css" rel="stylesheet" /> -->
-  <link href="<?php echo SITE_URL . "/simple.min.css" ?>" rel="stylesheet" />
-  <link href="<?php echo SITE_URL . "/style.css" ?>" rel="stylesheet" />
+  <link href="<?php echo SITE_URL . "/assets/simple.css" ?>" rel="stylesheet" />
+  <link href="<?php echo SITE_URL . "/assets/style.css" ?>" rel="stylesheet" />
 </head>
 <body>
 <header>

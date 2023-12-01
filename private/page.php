@@ -27,6 +27,9 @@ class Page
                     $this->get_content_only()
                 )
             );
+            // echo $this->insert_relative_links(
+            //             $this->get_content_only()
+            // );
         }
         else
         {
@@ -84,22 +87,34 @@ class Page
 
     function insert_relative_links(string $text_content) : string
     {
-        // Link ad altre pagine
-        return preg_replace_callback(
-            "/(!*)\[([a-zA-Z0-9 \_\.]*)]\(([|a-z_\.]+)\)/",
-            function ($a){
-                // if ($a[1]=="!")
-                // {
-                //     $new_url = "/index." . $tpath->as_query_only();
-                // }
-                // else
-                // {
-                //     $new_url = "/index." . $path->as_query_only();
-                // }                
-                return $a[1] . "[" . $a[2] . "](" . $a[3] . ")";
+        // Immagini
+        $text_content = preg_replace_callback(
+            "/IMG\[([a-zA-Z _,\.àèéìòù]*)\]\(([a-z0-9\.]+)\)/",
+            function ($a)
+            {
+                $img = new Image($this->path, $a[2]);
+                $res = "![" . $a[1] . "](" . $img->as_url() .")";
+                // print_r($res);
+                return $res;
             },
             $text_content
         );
+
+        // Altre pagine
+        $text_content = preg_replace_callback(
+            "/LINK\[([a-zA-Z _,\.àèéìòù]*)\]\(([a-z0-9_|]+)\)/",
+            function ($a)
+            {
+                $p = new Path();
+                $p->build_from_query_param($a[2]);
+                $res = "[" . $a[1] . "](" . $p->as_url() .")";
+                // print_r($res);
+                return $res;
+            },
+            $text_content
+        );
+        
+        return $text_content;
     }
 }
 ?>

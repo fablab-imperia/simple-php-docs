@@ -5,6 +5,7 @@ require_once "private/CONST.php";
 
 $p = new Path();
 $p->build_from_query_param($_GET["path"]);
+$GLOBALS["breadcrumb"] = $p->get_breadcrumb_data();
 
 if (isset($_GET["img"]))
 {
@@ -26,7 +27,6 @@ foreach ($immagini as $img)
 }
 echo "</ul>";
 echo "<a class=\"button\" href=\"" . SITE_URL . "/img_upload.php?" . $p->as_query_only() . "\">" . "Carica nuova immagine" . "</a>";
-
 
 require_once "private/footer.php";
 ?>

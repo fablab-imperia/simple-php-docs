@@ -12,7 +12,7 @@ function sanitize_address(string $path) : array
     }
     $path = explode(
         "|",
-        preg_replace("/[^a-zA-Z0-9_|\n?]/", "", $path),
+        preg_replace(REGEXP_PATH_QUERYSTRING, "", $path),
         5
     );
     return $path;

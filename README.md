@@ -7,8 +7,27 @@ Una semplice wiki realizzata pro bono per [Fablab Imperia](https://fablabimperia
 - [x] pagine di inserimento articoli
 - [x] restituzione immagini
 - [x] caricamento immagini
+- [x] intra link
 - [ ] inserire misure di sicurezza con .htaccess
 - [ ] ricerca testuale client-side
+
+
+## Dipendenze/Dependencies
+
+Il foglio di stile [SimpleCSS](https://simplecss.org/) nel file `assets/simple.css` è stato realizzato da Kev Quirk, pubblicato con licenza MIT(expat).
+
+Viene utilizzata la libreria [Parsedown](https://github.com/erusev/parsedown), i cui file sono inclusi nella cartella "parsedown-1.7.4". La libreria Parsedown è pubblicata con licenza MIT(expat), reperibile sul suo repository ufficiale come da link precedente.
+
+
+## Link interni e immagini
+
+```
+// Per immagini caricate nella pagina attuale
+IMG[testo alternativo](nome file immagine)
+
+// Per intra link ad altra pagine della wiki
+LINK[testo mostrato](percorso pagina interna, separato da pipe "|")
+```
 
 
 # Licenza e informazioni di copyright
@@ -24,7 +43,3 @@ Copyright © 2023 Massimo Gismondi
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see https://www.gnu.org/licenses/.
-
-## Dipendenze/Dependencies
-
-Viene utilizzata la libreria [Parsedown](https://github.com/erusev/parsedown), i cui file sono inclusi nella cartella "parsedown-1.7.4". La libreria Parsedown è pubblicata con licenza MIT(expat), reperibile sul suo repository ufficiale come da link precedente.

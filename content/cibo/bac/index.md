@@ -10,6 +10,6 @@ sa-
 - adadsa
   - a
 
-link @[a](https://www.fablabimperia.org)
+link IMG[a](abc.png)
 sasa
-relative [re](a.png)
+relative LINK[re](pagina_1)
