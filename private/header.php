@@ -12,6 +12,7 @@ require_once "CONST.php";
 </head>
 <body>
 <header>
+  <img class="fablab_logo" src="<?php echo SITE_URL; ?>/assets/fablab_logo.png" alt="FablabImperia logo">
   <h1><?php echo SITE_NAME; ?></h1>
   <nav>
     <?php
