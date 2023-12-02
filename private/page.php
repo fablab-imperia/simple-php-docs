@@ -12,6 +12,20 @@ class Page
        $this->path = $path_obj;
     }
 
+    public function save_edit(string $titolo, string $contenuto)
+    {
+        $titolo = preg_replace(REGEXP_TITLE_FILTER, "", $titolo);
+        $contenuto = preg_replace(REGEXP_CONTENT_FILTER, "", $contenuto);
+        file_put_contents(
+            $this->path->as_md_file(),
+            "+++\ntitle=\"" . $titolo . "\"\n+++\n" .
+            $contenuto
+        );
+        require_once "lunr_index.php";
+        $lunr = new LunrJson();
+        $lunr->regenerate_file();
+    }
+
     public function render()
     {
         if ($this->path->is_page())
@@ -50,7 +64,7 @@ class Page
 
         return substr(
             $s,
-            strpos($s, "+++", 1) + 3
+            strpos($s, "+++", 1) + 4
         ); 
     }
 

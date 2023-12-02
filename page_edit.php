@@ -1,7 +1,6 @@
 <?php
 include "private/path_extract.php";
 require_once "private/page.php";
-require "private/header.php";
 require_once "private/CONST.php";
 
 
@@ -18,18 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     if (isset($_POST["titolo"]) && isset($_POST["contenuto"]))
     {
-        $titolo = preg_replace(REGEXP_TITLE_FILTER, "", $_POST["titolo"]);
-        $contenuto = preg_replace(REGEXP_CONTENT_FILTER, "", $_POST["contenuto"]);
-        file_put_contents(
-            $p->as_md_file(),
-            "+++\ntitle=\"" . $titolo . "\"\n+++\n" .
-            $contenuto
+        $page = new Page($p);
+        $page->save_edit(
+            $_POST["titolo"],
+            $_POST["contenuto"]
         );
     }
 }
 
 
 $page = new Page($p);
+$GLOBALS["page_title"] = "Modifica pagina " . $page->get_title();
+require "private/header.php";
 ?>
 
 <?php

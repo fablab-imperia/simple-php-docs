@@ -9,10 +9,11 @@ require_once "CONST.php";
   <!-- <link href="/mini-default.min.css" rel="stylesheet" /> -->
   <link href="<?php echo SITE_URL . "/assets/simple.css" ?>" rel="stylesheet" />
   <link href="<?php echo SITE_URL . "/assets/style.css" ?>" rel="stylesheet" />
+  <script src="<?php echo SITE_URL . "/assets/lunr.js" ?>"></script>
 </head>
-<body>
+<body data-siteurl="<?php echo SITE_URL; ?>">
 <header>
-  <img class="fablab_logo" src="<?php echo SITE_URL; ?>/assets/fablab_logo.png" alt="FablabImperia logo">
+  <img class="fablab_logo" src="<?php echo SITE_URL; ?>/assets/logo.png" alt="FablabImperia logo">
   <h1><?php echo SITE_NAME; ?></h1>
   <nav>
     <?php
@@ -27,5 +28,29 @@ require_once "CONST.php";
     }
     ?>
   </nav>
+
+  <div>
+    <label class="search_button button" for="search_button_checkbox">
+      <img src="<?php echo SITE_URL;?>/assets/magnifying_glass_icon.svg" alt="">
+    </label>
+    
+  </div>
 </header>
 <main>
+<input type="checkbox" name="" id="search_button_checkbox">
+<div class="modal">
+  <div>
+    <header>
+      <label class="button" for="search_button_checkbox">X</label>
+      <input id="id_search_wiki" type="text">
+    </header>
+    <main>
+      <h5>Risultati:</h5> 
+      <div id="content_search_results">
+        
+      </div>
+    </main>
+
+  </div>
+  
+</div>

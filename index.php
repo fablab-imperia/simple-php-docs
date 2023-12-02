@@ -9,8 +9,9 @@ $p->build_from_query_param($_GET["path"]);
 $GLOBALS["breadcrumb"] = $p->get_breadcrumb_data();
 if ($p->is_category())
 {
-    require "private/header.php";
     $c = new Category($p);
+    $GLOBALS["page_title"] = $c->get_title();
+    require "private/header.php";
     $c->render();
 }
 else if ($p->is_page())

@@ -43,5 +43,10 @@ class Category
             // echo "<li><a href=\"" . $subcat->as_url() . "\">" . "Pagina: " .  $subcat->get_name() . "</a></li>";
         }
     }
+
+    public function get_title() : string
+    {
+        return "Categoria " . $this->path->get_name();
+    }
 }
 ?>

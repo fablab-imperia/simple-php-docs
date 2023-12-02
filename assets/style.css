@@ -2,6 +2,11 @@
 {
     background-color: black;
 }
+.button.search_button img
+{
+    width: 16px;
+}
+
 textarea
 {
     font-family:monospace;
@@ -17,4 +22,43 @@ textarea
     margin-top: 1em;
     width: 9em;
     height: auto;
+}
+
+#search_button_checkbox
+{
+    display: none;
+}
+
+#search_button_checkbox:checked ~ .modal
+{
+    display: block;
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(107, 107, 107, 0.26);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal
+{
+    display: none;
+}
+.modal > div
+{
+    min-width: 40rem;
+    
+    background-color: var(--bg);
+    border-radius: 16px;
+    padding: 16px;
+    
+}
+
+#content_search_results
+{
+    height: 60vh;
+    overflow-y: auto;
 }

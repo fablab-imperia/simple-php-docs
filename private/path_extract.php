@@ -1,5 +1,6 @@
 <?php
 require_once "image.php";
+require_once "page.php";
 require_once "CONST.php";
 
 // Funzione comoda per estrarre la querystring
@@ -65,6 +66,11 @@ class Path
     {
         return $this->file_path_folder;
     }
+    public function as_folder_array() : array
+    {
+        return $this->folders_array;
+    }
+
 
     public function is_category() : bool
     {
@@ -98,20 +104,51 @@ class Path
         }
         return $subcategories;
     }
+
+    public function _get_page_data_recursive() : array
+    {
+        $collected_data = [];
+        foreach ($this->find_children() as $item)
+        {
+            if ($item->is_category())
+            {
+                $collected_data = array_merge(
+                    $collected_data,
+                    $item->_get_page_data_recursive()
+                );                
+            }
+            else
+            {
+                $p = new Page($item);
+                $item_folders_array = $item->as_folder_array();
+                array_pop($item_folders_array);
+                array_push(
+                    $collected_data,
+                    array(
+                        "title" => $p->get_title(),
+                        "url" => $item->as_url(),
+                        "category_path" => $item_folders_array,
+                        "content" => $p->get_content_only()
+                    )
+                );                
+            }
+        }
+        return $collected_data;
+    }
     
     public function as_url() : string
     {
-        return SITE_URL . "/index.php?path=" . implode("|", $this->folders_array );
+        return SITE_URL . "/index.php?" . $this->as_query_only();
     }
 
     public function as_url_mut() : string
     {
-        return SITE_URL . "/page_edit.php?path=" . implode("|", $this->folders_array );
+        return SITE_URL . "/page_edit.php?" . $this->as_query_only();
     }
 
     public function as_query_only() : string
     {
-        return "path=" . implode("|", $this->folders_array );
+        return "path=" . urlencode(implode("|", $this->folders_array ));
     }
 
     public function get_name() : string
@@ -124,12 +161,19 @@ class Path
         {
             if ($this->is_page())
             {
-                require_once "page.php";
                 $p = new Page($this);
                 // $p->build_from_array($this->folders_array);
                 return $p->get_title();
             }
-            return $this->folders_array[count($this->folders_array)-1];
+            else
+            {
+                return preg_replace(
+                    "/_/",
+                    " ",
+                    $this->folders_array[count($this->folders_array)-1]
+                );
+            }
+            
         }
     }
 
@@ -163,10 +207,8 @@ class Path
             mkdir($this->file_path_folder . "/" . $nome_cartella);
             if ($is_page)
             {
-                file_put_contents(
-                    $this->file_path_folder . "/" . $nome_cartella . "/index.md",
-                    "+++\ntitle=\"" . $nome . "\"\n+++"
-                );
+                $page = new Page($p);
+                $page->save_edit($nome, "");
             }
             return $p;
         }

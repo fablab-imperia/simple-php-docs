@@ -34,15 +34,23 @@ if (
 <?php
 
 $GLOBALS["breadcrumb"] = $p->get_breadcrumb_data();
+$GLOBALS["page_title"] = "Carica immagine";
 require_once "private/header.php";
 ?>
-
+<h1>Carica nuova immagine</h1>
 <form action="<?php echo SITE_URL . "/img_upload.php?" . $p->as_query_only(); ?>" method="post" enctype="multipart/form-data">
-    <label for="img_filename_field">Nome file</label>
-    <input type="text" name="filename" id="img_filename_field" required pattern="[a-z0-9_]+">
     <label for="fileToUpload">Immagina da caricare</label>
-    
     <input required type="file" accept="image/png,image/jpg" name="fileToUpload" id="fileToUpload">
+
+    <label for="img_filename_field">
+        Nome file
+        <br>
+        <small>
+            Il nome, tutto minuscolo e senza estensione, con cui verrà salvata l'immagine sul server.
+            Se si inserisce un nome file di una immagine già esistente, questa verrà sovrascritta.
+        </small>
+    </label>
+    <input type="text" name="filename" id="img_filename_field" required pattern="[a-z0-9_]+">
 
     <div>
         <label for="tipo_estensione">Estensione file</label>
