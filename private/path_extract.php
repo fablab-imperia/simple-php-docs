@@ -119,18 +119,17 @@ class Path
             }
             else
             {
+                
                 $p = new Page($item);
-                $item_folders_array = $item->as_folder_array();
-                array_pop($item_folders_array);
                 array_push(
                     $collected_data,
                     array(
                         "title" => $p->get_title(),
                         "url" => $item->as_url(),
-                        "category_path" => $item_folders_array,
+                        "category_path" => "",
                         "content" => $p->get_content_only()
                     )
-                );                
+                );   
             }
         }
         return $collected_data;

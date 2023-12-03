@@ -1,2 +1,5 @@
 .htpasswd
 .htaccess
+lunr_data.json
+content/**
+!content/.htaccess

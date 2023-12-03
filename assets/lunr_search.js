@@ -10,7 +10,6 @@ async function fetch_docs()
         
         let idx = lunr(function () {
             this.ref('id');
-            this.field('url');
             this.field('title');
             this.field('content');
             documents.forEach(function (doc, id) {
@@ -28,7 +27,7 @@ async function fetch_docs()
                 html_data += `
                 <article class="card">
                 <h3>${item_data.title}</h3>
-                <a class="button pagebutton" href="${item_data.url}">Apri</a>
+                <a class="button pagebutton" href="${document.body.dataset.siteurl + item_data.url}">Apri</a>
                 </article>
                 `;
             }
@@ -40,7 +39,7 @@ async function fetch_docs()
             "input",
             (ev)=>{
                 let res = idx.search(
-                    ev.target.value + "*"
+                    ev.target.value + "~1"
                 );
                 let container = document.getElementById("content_search_results");
                 container.innerHTML = "";
@@ -57,7 +56,6 @@ async function fetch_docs()
             }
         );
     }
-    
 )();
 
 

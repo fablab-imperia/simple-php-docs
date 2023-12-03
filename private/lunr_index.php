@@ -7,8 +7,10 @@ class LunrJson
     {
         $path = new Path();
         $path->build_from_array([]);
+        $found_data = $path->_get_page_data_recursive();
+
         return json_encode(
-            $path->_get_page_data_recursive()
+            $found_data
         );
     }
     public function write_to_stdout()
@@ -19,11 +21,11 @@ class LunrJson
 
     public function regenerate_file()
     {
-        $path = new Path();
-        $path->build_from_array([]);
+        $out_path = __DIR__ . "/../" . "lunr_data.json";
+        $data = $this->lunr_json_generate();
         file_put_contents(
-            __DIR__ . "/../" . "lunr_data.json",
-            $this->lunr_json_generate()
+            $out_path,
+            $data
         );
     }
 }
