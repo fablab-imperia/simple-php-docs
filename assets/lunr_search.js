@@ -27,7 +27,7 @@ async function fetch_docs()
                 html_data += `
                 <article class="card">
                 <h3>${item_data.title}</h3>
-                <a class="button pagebutton" href="${document.body.dataset.siteurl + item_data.url}">Apri</a>
+                <a class="button pagebutton" href="${item_data.url}">Apri</a>
                 </article>
                 `;
             }

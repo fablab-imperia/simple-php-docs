@@ -103,7 +103,7 @@ class Page
     {
         // Immagini
         $text_content = preg_replace_callback(
-            "/IMG\[([0-9a-zA-Z _,\.àèéìòù']*)\]\(([_a-z0-9\.]+)\)/",
+            "/IMG\[([0-9a-zA-Z _,\.àèéìòù'\(\)]*)\]\(([_a-z0-9\.]+)\)/",
             function ($a)
             {
                 $img = new Image($this->path, $a[2]);
